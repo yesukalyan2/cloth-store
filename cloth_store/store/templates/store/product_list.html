@@ -1,0 +1,11 @@
+{% extends "store/base.html" %}
+{% block title %}Shop | Thread & Tone{% endblock %}
+{% block content %}
+<section class="hero"><p>NEW SEASON · 2026</p><h1>Wear what feels like you.</h1><span>Modern essentials, beautifully made.</span></section>
+<nav class="categories"><a class="{% if not selected_category %}active{% endif %}" href="{% url 'store:product_list' %}">All</a>{% for category in categories %}<a class="{% if selected_category == category %}active{% endif %}" href="{% url 'store:product_list_by_category' category.slug %}">{{ category.name }}</a>{% endfor %}</nav>
+<section class="grid">
+{% for product in products %}
+  <article class="card"><a href="{{ product.get_absolute_url }}">{% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}">{% else %}<div class="placeholder">{{ product.category.name }}</div>{% endif %}<div class="card-copy"><p>{{ product.category.name }}</p><h2>{{ product.name }}</h2><strong>₹{{ product.price }}</strong></div></a></article>
+{% empty %}<p class="empty">No pieces are available in this collection yet.</p>{% endfor %}
+</section>
+{% endblock %}

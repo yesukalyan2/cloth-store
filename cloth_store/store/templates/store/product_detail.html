@@ -1,0 +1,6 @@
+{% extends "store/base.html" %}
+{% block title %}{{ product.name }} | Thread & Tone{% endblock %}
+{% block content %}
+<a class="back" href="{% url 'store:product_list' %}">← Continue shopping</a>
+<section class="detail"><div>{% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}">{% else %}<div class="placeholder large">{{ product.category.name }}</div>{% endif %}</div><div class="detail-copy"><p>{{ product.category.name|upper }}</p><h1>{{ product.name }}</h1><h2>₹{{ product.price }}</h2><p class="description">{{ product.description|linebreaksbr }}</p><button>Add to bag</button><small>Shipping and taxes calculated at checkout.</small></div></section>
+{% endblock %}
